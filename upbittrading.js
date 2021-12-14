@@ -39,6 +39,7 @@ const morgan = require('morgan');
 const connectMultiparty = require('connect-multiparty');
 
 const Next = require('next');
+const RouterUtil = require("./serverSides/utils/RouterUtil");
 const nextJs = Next({dev});
 const nextJsRequestHandler = nextJs.getRequestHandler();
 
@@ -60,6 +61,8 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
         expressServer.use(connectMultiparty({uploadDir: 'temp/upload'}));
         expressServer.use(bodyParser.json());
         expressServer.use(bodyParser.urlencoded({extended: false}));
+
+        expressServer.use(RouterUtil.extendReqRes);
 
 
         expressServer.use('/api', require('./serverSides/routes/api'));
