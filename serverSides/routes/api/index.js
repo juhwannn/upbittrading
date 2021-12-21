@@ -8,5 +8,6 @@ const wrapTryCatch = RouterUtil.wrapTryCatch;
 
 
 router.use('/test', require('./test'));
+router.use('/upbitApi', require('./upbitApi'));
 
 module.exports = router;

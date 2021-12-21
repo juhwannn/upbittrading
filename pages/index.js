@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import Link from "next/link";
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
-import styled from 'styled-components';
+import {TableAdminArray, TableAdminObject} from "../pageComponents/TableAdmin";
+import styled, {keyframes} from "styled-components";
+import axios from "axios";
 
 const Root = styled.div`
     >header.header {
@@ -48,6 +50,24 @@ const Root = styled.div`
 `;
 
 export default function Home() {
+    const [upbitResponse, setUpbitResponse] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('/api/upbitApi/');
+
+                setUpbitResponse(JSON.parse(response?.data?.body) ?? upbitResponse);
+
+            } catch (e) {
+                console.log(e);
+                const data = e?.response?.data;
+                console.log("error : " + data);
+                alert("error : " + data);
+            }
+        })();
+    },[]);
+
     return (
         <Root>
             <Head>
@@ -63,11 +83,17 @@ export default function Home() {
                         UPBitTrading
                     </span>
                     <span className={'right'}>
-                        <Link href={'/services'}><a>서비스안내</a></Link>
+                        <Link href={'/services'}><a>내지갑</a></Link>
                         <Link href={'/test'}><a>로그인</a></Link>
                     </span>
                 </nav>
             </header>
+
+            <h1>
+                Main Page.
+            </h1>
+
+            <TableAdminArray value={upbitResponse}></TableAdminArray>
 
         </Root>
     )
