@@ -6,7 +6,7 @@ const version = process.version;
 const versionRequired = 'v12.20.1'; // TODO 'v14.16.1';
 const NODE_ENV = process.env.NODE_ENV;
 //const port = parseInt(process.env.PORT, 10) || 21030;
-const port = 3002;
+const port = 3000;
 const dev = NODE_ENV !== 'staging' && NODE_ENV !== 'production';
 
 const nextJsEnabled = true;
