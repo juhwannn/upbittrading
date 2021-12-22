@@ -60,6 +60,7 @@ export default function Home() {
                 setUpbitResponse(JSON.parse(response?.data?.body) ?? upbitResponse);
 
             } catch (e) {
+                //TODO: catch문에 쓸 에러페이지 만들기
                 console.log(e);
                 const data = e?.response?.data;
                 console.log("error : " + data);
