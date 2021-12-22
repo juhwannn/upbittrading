@@ -66,41 +66,12 @@ const Root = styled.div`
 `;
 
 const fieldMap = {
-    seq: '#',
-    dateCreated: '생성일',
-    dateModified: '수정일',
-    id: '아이디',
-    name: '이름',
-    role: '권한',
-    isCorporation: '법인',
-    companyName: '법인명',
-    dateEmailVerified: '메일인증일',
-    mobile: '휴대폰',
-    email: '이메일',
-    agreeEula: '약관동의',
-    agreePrivacy: '개인정보동의',
-    agreeAd: '광고동의',
-    agreeNewsletter: '뉴스레터동의',
-    industry: '업종',
-    domain: '도메인',
-    referer: '가입경로',
-    recommender: '추천인',
-    businessRegistrationNumber: '사업자등록번호',
-    state: '상태',
-    vmid: 'VMID',
-    dateStarted: '시작일',
-    serviceName: '서비스명',
-    user: '사용자',
-    service: '서비스',
-    priority: '우선순위',
-    price: '금액',
-    cpu: 'CPU',
-    rootVolume: 'Root Volume',
-    network: 'Network',
-    memory: 'Memory',
-    description: '설명',
-    userName: '사용자명',
-    vmName: 'VM Name'
+    currency: '화폐',
+    balance: '주문가능 금액',
+    locked: '주문중 묶여있는 금액',
+    avg_buy_price: '매수 평균가',
+    avg_buy_price_modified: '매수 평균가 수정 여부',
+    unit_currency: '평단가 화폐'
 };
 const fieldConverter = f => fieldMap[f] ?? f;
 
