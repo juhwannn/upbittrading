@@ -85,7 +85,7 @@ export default function Home() {
                     </span>
                     <span className={'right'}>
                         <Link href={'/services'}><a>내지갑</a></Link>
-                        <Link href={'/test'}><a>로그인</a></Link>
+                        <Link href={'/login'}><a>로그인</a></Link>
                     </span>
                 </nav>
             </header>
