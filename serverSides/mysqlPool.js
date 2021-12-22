@@ -26,6 +26,13 @@ const poolPromise = async () => {
     return pool;
 };
 
+const headOrNull = array => {
+    // return array?.[0]; // node 14 부터 가능
+    if (!array || !array.length)
+        return null;
+
+    return array[0];
+};
 
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
@@ -35,5 +42,9 @@ module.exports = {
     },
     getConnection: async function () {
         return (await poolPromise()).getConnection(...arguments)
-    }
+    },
+    selectOne: async function () {
+        const array = await (await poolPromise()).query(...arguments);
+        return headOrNull(array);
+    },
 };
