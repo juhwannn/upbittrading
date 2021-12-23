@@ -40,6 +40,8 @@ const connectMultiparty = require('connect-multiparty');
 
 const Next = require('next');
 const RouterUtil = require("./serverSides/utils/RouterUtil");
+const SignedCookieLogic = require("./serverSides/logics/SignedCookieLogic");
+const cookieParser = require("cookie-parser");
 const nextJs = Next({dev});
 const nextJsRequestHandler = nextJs.getRequestHandler();
 
@@ -62,7 +64,9 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
         expressServer.use(bodyParser.json());
         expressServer.use(bodyParser.urlencoded({extended: false}));
 
+        expressServer.use(cookieParser(process.env.COOKIEPARSER_KEY));
         expressServer.use(RouterUtil.extendReqRes);
+        expressServer.use(SignedCookieLogic.extendReqRes);
 
 
         expressServer.use('/api', require('./serverSides/routes/api'));
