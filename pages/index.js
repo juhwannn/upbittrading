@@ -88,6 +88,7 @@ export default function Home() {
             </Head>
             <header className={'header'}>
                 {/*TODO: Header refactor 한곳으로 빼야함*/}
+                {/*TODO: 쿠키 생성까진 됐으니까 로그인 한 사용자는 로그아웃이 뜨도록 변경*/}
                 <nav>
                     <span className="title">
                         <Link href={'/'}>
