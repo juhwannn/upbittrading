@@ -80,6 +80,7 @@ export default function Home() {
                 <link rel="icon" href="/256x256.png" sizes="256x256"/>
             </Head>
             <header className={'header'}>
+                {/*TODO: Header refactor 한곳으로 빼야함*/}
                 <nav>
                     <span className="title">
                         <Link href={'/'}>
