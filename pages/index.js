@@ -5,6 +5,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {TableAdminArray, TableAdminObject} from "../pageComponents/TableAdmin";
 import styled, {keyframes} from "styled-components";
 import axios from "axios";
+import ContextUser from "../pageComponents/ContextUser";
 
 const Root = styled.div`
     >header.header {
@@ -49,25 +50,32 @@ const Root = styled.div`
     }
 `;
 
+const Profile = async () => {
+    const [user, setUser] = useContext(ContextUser);
+    const response = await axios.get('/api/auth/getUser');
+    const newUser = response?.data?.user;
+    setUser(newUser);
+
+    return user?.name ? (
+        <>
+            <Link href={'/myPage'}>
+                <a>{user.name}님</a>
+            </Link>
+            {user.role === 'Admin' && (
+                <Link href={'/admin'}><a>관리자</a></Link>
+            )}
+            <Link href={'/logout'}><a>로그아웃</a></Link>
+        </>
+    ) : (
+        <>
+            <Link href={'/login'}><a>로그인</a></Link>
+            <Link href={'/join'}><a>회원가입</a></Link>
+        </>
+    );
+};
+
 export default function Home() {
-    const [upbitResponse, setUpbitResponse] = useState([]);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get('/api/upbitApi/');
-
-                setUpbitResponse(JSON.parse(response?.data?.body) ?? upbitResponse);
-
-            } catch (e) {
-                //TODO: catch문에 쓸 에러페이지 만들기
-                console.log(e);
-                const data = e?.response?.data;
-                console.log("error : " + data);
-                alert("error : " + data);
-            }
-        })();
-    },[]);
 
     return (
         <Root>
@@ -81,11 +89,14 @@ export default function Home() {
             <header className={'header'}>
                 <nav>
                     <span className="title">
-                        UPBitTrading
+                        <Link href={'/'}>
+                            UPBitTrading
+                        </Link>
                     </span>
                     <span className={'right'}>
-                        <Link href={'/services'}><a>내지갑</a></Link>
+                        <Link href={'/service'}><a>내지갑</a></Link>
                         <Link href={'/login'}><a>로그인</a></Link>
+
                     </span>
                 </nav>
             </header>
@@ -94,7 +105,7 @@ export default function Home() {
                 Main Page.
             </h1>
 
-            <TableAdminArray value={upbitResponse}></TableAdminArray>
+
 
         </Root>
     )
