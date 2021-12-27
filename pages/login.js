@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
+import Link from "next/link";
 
 export default function Login() {
 
@@ -22,7 +23,8 @@ export default function Login() {
                         console.log(response);
                         await router.push('/');
                     } catch (e) {
-
+                        alert(e);
+                        // TODO: catch
                     }
                 })();
 
@@ -46,7 +48,7 @@ export default function Login() {
                 <br/>
 
                 <button>로그인</button>
-                <button>회원가입</button>
+                <Link href={'/join'}><button>회원가입</button></Link>
             </form>
         </>
     )

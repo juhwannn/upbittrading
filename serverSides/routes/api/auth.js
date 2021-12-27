@@ -18,6 +18,7 @@ const rowUserToCookieObject = row => ({
 
 router.post('/login', wrapTryCatch(async (req, res) => {
     const {id, password} = req.getObjectRequired('id', 'password');
+    // TODO: id, password 입력 안되면 오류남
 
     const row = await selectOne(`SELECT * FROM User WHERE id = ?`, [id]);
     if (!row) {
@@ -42,7 +43,7 @@ router.get('/getUser', wrapTryCatch(async (req, res) => {
     if (!user) {
         return res.renderJson();
     }
-console.log("asdgasd : " + user);
+
     const row = await selectOne(`SELECT * FROM USER WHERE seq = ?`, user.seq);
 
     // 접속 가능상태가 아니면 쿠키 삭제
@@ -59,6 +60,28 @@ console.log("asdgasd : " + user);
 
     res.renderJson({
         user: row,
+    });
+}));
+
+router.post('/join', wrapTryCatch(async (req, res) => {
+    const {id, password, passwordCon, email} = req.getObjectRequired('id', 'password', 'passwordCon', 'email');
+
+
+    const row = await selectOne(`SELECT * FROM User WHERE id = ?`, [id]);
+    if (!row) {
+        return res.renderJson403();
+    }
+
+    const checkPassword = await BcryptLogic.compare(password, row.pwd);
+
+    if (!checkPassword)
+        return res.renderJson403();
+
+    const user = rowUserToCookieObject(row);
+
+    res.signedCookieUserSet(user);
+    res.renderJson({
+        'ss': 'ss'
     });
 }));
 
