@@ -64,22 +64,12 @@ router.get('/getUser', wrapTryCatch(async (req, res) => {
 }));
 
 router.post('/join', wrapTryCatch(async (req, res) => {
-    const {id, password, passwordCon, email} = req.getObjectRequired('id', 'password', 'passwordCon', 'email');
+    const {id, password, passwordCon, name, email} = req.getObjectRequired('id', 'password', 'passwordCon', 'name', 'email');
 
 
-    const row = await selectOne(`SELECT * FROM User WHERE id = ?`, [id]);
-    if (!row) {
-        return res.renderJson403();
-    }
+    const row = await selectOne(`INSERT INTO User(id, pwd, email, name, created_dt) VALUES(?, ?, ?, ?, NOW())`, [id, password, email, name]);
 
-    const checkPassword = await BcryptLogic.compare(password, row.pwd);
 
-    if (!checkPassword)
-        return res.renderJson403();
-
-    const user = rowUserToCookieObject(row);
-
-    res.signedCookieUserSet(user);
     res.renderJson({
         'ss': 'ss'
     });
