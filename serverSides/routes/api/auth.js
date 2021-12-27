@@ -66,9 +66,9 @@ router.get('/getUser', wrapTryCatch(async (req, res) => {
 router.post('/join', wrapTryCatch(async (req, res) => {
     const {id, password, passwordCon, name, email} = req.getObjectRequired('id', 'password', 'passwordCon', 'name', 'email');
 
+    const hashPassword = await BcryptLogic.hash(password);
 
-    const row = await selectOne(`INSERT INTO User(id, pwd, email, name, created_dt) VALUES(?, ?, ?, ?, NOW())`, [id, password, email, name]);
-
+    const row = await selectOne(`INSERT INTO User(id, pwd, email, name, created_dt) VALUES(?, ?, ?, ?, NOW())`, [id, hashPassword, email, name]);
 
     res.renderJson({
         'ss': 'ss'

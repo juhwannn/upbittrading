@@ -22,13 +22,17 @@ export default function Login() {
                     try {
                         // TODO: 유효성 검사, 패스워드 체크
                         const response = await axios.post('/api/auth/join', {
-                            id, password, passwordCon, email
+                            id, password, passwordCon, name, email
                         });
+
+                        await router.push("/");
                     } catch (e) {
                         alert(e);
                         // TODO: catch
                     }
                 })();
+
+                return false;
             }}>
                 <label>
                     아이디
@@ -54,6 +58,8 @@ export default function Login() {
                     이메일
                     <input type="text" value={email} onChange={e => setEmail(e.target.value)}/><br/>
                 </label>
+
+                <button>가입</button>
             </form>
             {/*TODO: 개인정보 이용 동의*/}
         </>
