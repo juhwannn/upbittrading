@@ -15,6 +15,7 @@ export default function Login() {
         <>
             <form onSubmit={e => {
                 (async() => {
+                    // TODO: 계정 인증, UPBit api 에서 access key, secret key 발급 받고 사용할 수 있도록 변경
                     try {
                         const response = await axios.post('/api/auth/login', {
                             id, password
