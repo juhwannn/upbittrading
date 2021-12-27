@@ -10,6 +10,7 @@ export default function Login() {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCon, setPasswordCon] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
 
@@ -42,6 +43,11 @@ export default function Login() {
                 <label>
                     비밀번호 확인
                     <input type="password" value={passwordCon} onChange={e => setPasswordCon(e.target.value)}/><br/>
+                </label>
+
+                <label>
+                    이름
+                    <input type="text" value={name} onChange={e => setName(e.target.value)}/><br/>
                 </label>
 
                 <label>
