@@ -21,7 +21,7 @@ export default function Login() {
                 (async() => {
                     try {
                         // TODO: 유효성 검사, 패스워드 체크
-                        const response = await axios.post('/api/auth/join', {
+                        await axios.post('/api/auth/join', {
                             id, password, passwordCon, name, email
                         });
 
