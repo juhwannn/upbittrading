@@ -5,6 +5,10 @@ import React, {useContext, useEffect, useState} from "react";
 import {TableAdminArray} from "../pageComponents/TableAdmin";
 import styled from "styled-components";
 
+function buyTheRipple() {
+
+    return;
+}
 
 export default function Home() {
 
@@ -30,6 +34,15 @@ export default function Home() {
     return (
         <>
             <TableAdminArray value={upbitResponse}></TableAdminArray>
+
+            <br/>
+            <br/>
+
+            <button onClick={e => {
+                (async () => {
+                    buyTheRipple();
+                })();
+            }}>리플 구매</button>
         </>
     )
 }
