@@ -5,11 +5,6 @@ import React, {useContext, useEffect, useState} from "react";
 import {TableAdminArray} from "../pageComponents/TableAdmin";
 import styled from "styled-components";
 
-function buyTheRipple() {
-
-    return;
-}
-
 export default function Home() {
 
     const [upbitResponse, setUpbitResponse] = useState([]);
@@ -40,7 +35,17 @@ export default function Home() {
 
             <button onClick={e => {
                 (async () => {
-                    buyTheRipple();
+                    try{
+                        const response = await axios.post('/api/upbitApi/buyRipple');
+
+                        alert(JSON.stringify(response.data.body));
+                    } catch (e) {
+                        alert(e);
+                        console.log(e);
+                    }
+
+                    e.preventDefault();
+                    return false;
                 })();
             }}>리플 구매</button>
         </>
