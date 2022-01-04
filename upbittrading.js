@@ -86,6 +86,8 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
         cron.schedule('* * * * *', async () => {
             console.log('cron - every minute');
 
+            // TODO: 매수가를 어떻게잡을지 고민해보기
+
             // TODO: 매시 현재 갖고있는 원화로 리플을 얼마까지 구매할 수 있는지 @return: 리플 최대 갯수, 리플 가격
             // TODO: 위에서 받은 최대 갯수와 가격으로 지정가 매수 @param: 리플 최대 갯수, 리플 가격
             // TODO: 현재 갖고있는 리플을 매수가격의 1%~2% 로 지정가 판매 @param: 코인이름
