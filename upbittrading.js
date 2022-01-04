@@ -42,6 +42,7 @@ const Next = require('next');
 const RouterUtil = require("./serverSides/utils/RouterUtil");
 const SignedCookieLogic = require("./serverSides/logics/SignedCookieLogic");
 const cookieParser = require("cookie-parser");
+const cron = require("node-cron");
 const nextJs = Next({dev});
 const nextJsRequestHandler = nextJs.getRequestHandler();
 
@@ -80,6 +81,14 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
                 throw err;
 
             console.info(`http://localhost:${port}`);
+        });
+
+        cron.schedule('* * * * *', async () => {
+            console.log('cron - every minute');
+
+            // TODO: 매시 현재 갖고있는 원화로 리플을 얼마까지 구매할 수 있는지 @return: 리플 최대 갯수, 리플 가격
+            // TODO: 위에서 받은 최대 갯수와 가격으로 지정가 매수 @param: 리플 최대 갯수, 리플 가격
+            // TODO: 현재 갖고있는 리플을 매수가격의 1%~2% 로 지정가 판매 @param: 코인이름
         });
 
     } catch (ex) {
