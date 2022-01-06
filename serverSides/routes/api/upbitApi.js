@@ -7,9 +7,9 @@ const RouterUtil = require('../../utils/RouterUtil');
 const wrapTryCatch = RouterUtil.wrapTryCatch;
 
 // UPBIT API
-const request = require('request')
-const uuidv4 = require("uuid/v4")
-const sign = require('jsonwebtoken').sign
+const request = require('request');
+const uuidv4 = require("uuid/v4");
+const sign = require('jsonwebtoken').sign;
 
 
 
