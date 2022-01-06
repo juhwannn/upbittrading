@@ -32,22 +32,6 @@ export default function Home() {
 
             <br/>
             <br/>
-
-            <button onClick={e => {
-                (async () => {
-                    try{
-                        const response = await axios.post('/api/upbitApi/buyRipple');
-
-                        alert(JSON.stringify(response.data.body));
-                    } catch (e) {
-                        alert(e);
-                        console.log(e);
-                    }
-
-                    e.preventDefault();
-                    return false;
-                })();
-            }}>리플 구매</button>
         </>
     )
 }
