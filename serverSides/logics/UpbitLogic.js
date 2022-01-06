@@ -38,12 +38,15 @@ const UpbitLogic = {
                 // TODO: error 처리
 
                 await res.data.map((v, i) => {
-                    if (v["currency"] === "KRW"){
+                    if (v["currency"] === "KRW") {
+                        if (v["locked"] > 0) {
+                            myMoney = Math.floor(myMoney - v["locked"]);
+                        }
+
                         myMoney = Math.floor(v["balance"]);
-                        console.log("myMoney :: " + myMoney);
                     }
                 });
-            })
+            });
 
             return myMoney;
         } catch (e) {
