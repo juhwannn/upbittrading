@@ -84,6 +84,8 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
 
             console.info(`http://localhost:${port}`);
         });
+        const myMoney = await UpbitLogic.getMyMoney();
+        await UpbitLogic.getCanByXRP(myMoney);
 
         cron.schedule('* * * * *', async () => {
             console.log('cron - every minute');
@@ -95,9 +97,13 @@ const nextJsRequestHandler = nextJs.getRequestHandler();
             const myMoney = await UpbitLogic.getMyMoney();
             console.log("myMoney : " + JSON.stringify(myMoney));
 
+            const canByXRP = await UpbitLogic.getCanByXRP(myMoney);
+            // TODO: 오후 1시정도에 하락장이면 그날은 매수 가격의 % 낮추거나 매수 매도 안하도록
+
             //const { amount, price } = getRipplePrice();
             // TODO: 위에서 받은 최대 갯수와 가격으로 지정가 매수 @param: 리플 최대 갯수, 리플 가격
             // TODO: 현재 갖고있는 리플을 매수가격의 1%~2% 로 지정가 판매 @param: 코인이름
+            // TODO: 매일 특정금액 이상 출금하기
         });
 
     } catch (ex) {
